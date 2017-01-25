@@ -105,6 +105,7 @@
     </properties>
 
     <profiles>
+	<!--
         <profile>
             <id>testresources</id>
             <activation>
@@ -119,6 +120,7 @@
                 </dependency>
             </dependencies>
         </profile>
+		-->
 
         <!-- For running unit tests with nd4j-native: "mvn clean test -P test-nd4j-native"
              Note that this excludes DL4J-cuda -->

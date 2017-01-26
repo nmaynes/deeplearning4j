@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.deeplearning4j</groupId>
     <artifactId>deeplearning4j-parent</artifactId>
-    <version>0.7.2</version>
+    <version>0.7.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DeepLearning4j</name>
 
@@ -37,18 +37,18 @@
 
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-
-
+       
+                <repository>
+                        <id>bintray-deeplearning4j-maven</id>
+                        <name>Deeplearning4j-maven</name>
+						<url>https://api.bintray.com/maven/deeplearning4j/maven/${project.artifactId}/;publish=1</url>
+                </repository>
+				 <snapshotRepository>
+					<id>snapshots</id>
+					<name>local-snapshots</name>
+					<url>http://localhost:8081/artifactory/libs-snapshot-local</url>
+				</snapshotRepository>
+ 
         <!-- Necessary for mvn site commands to work (see runWindowsTest.cmd); url isn't actually used -->
         <site>
             <id>ID</id>
@@ -61,10 +61,12 @@
     </prerequisites>
 
     <properties>
+        <py4j.version>0.10.4</py4j.version>
+        <jcommander.version>1.27</jcommander.version>
         <javacpp.version>1.3.1</javacpp.version>
         <javacpp-presets.version>1.3</javacpp-presets.version>
-        <nd4j.version>0.7.2</nd4j.version>
-        <datavec.version>0.7.2</datavec.version>
+        <nd4j.version>0.7.3-SNAPSHOT</nd4j.version>
+        <datavec.version>0.7.3-SNAPSHOT</datavec.version>
         <commonsmath.version>3.4.1</commonsmath.version>
         <commonslang.version>3.3.1</commonslang.version>
         <commonsio.version>2.4</commonsio.version>
@@ -103,10 +105,11 @@
     </properties>
 
     <profiles>
+	<!--
         <profile>
             <id>testresources</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -117,6 +120,7 @@
                 </dependency>
             </dependencies>
         </profile>
+		-->
 
         <!-- For running unit tests with nd4j-native: "mvn clean test -P test-nd4j-native"
              Note that this excludes DL4J-cuda -->
@@ -266,6 +270,7 @@
         <module>deeplearning4j-nlp-parent</module>
         <module>deeplearning4j-nn</module>
         <module>deeplearning4j-modelimport</module>
+        <module>deeplearning4j-keras</module>
     </modules>
 
     <licenses>
@@ -395,10 +400,13 @@
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
-                <configuration>
+                <!--
+				<configuration>
                     <skip>true</skip>
                 </configuration>
+				-->
             </plugin>
+			<!--
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -419,6 +427,7 @@
                     <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                 </configuration>
             </plugin>
+			-->
             <plugin>
                 <groupId>com.lewisd</groupId>
                 <artifactId>lint-maven-plugin</artifactId>

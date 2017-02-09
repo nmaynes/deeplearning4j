@@ -42,10 +42,7 @@
             <url>${NEXUS_URL_SNAPSHOT}</url>
         </snapshotRepository>
 
-    </distributionManagement>
-
-
-        <!-- Necessary for mvn site commands to work (see runWindowsTest.cmd); url isn't actually used -->
+         <!-- Necessary for mvn site commands to work (see runWindowsTest.cmd); url isn't actually used -->
         <site>
             <id>ID</id>
             <url>file:///</url>

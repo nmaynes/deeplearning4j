@@ -55,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-parameter-server-node_2.10</artifactId>
+            <artifactId>nd4j-parameter-server-node_${scalaClassifier}</artifactId>
             <version>${nd4j.version}</version>
         </dependency>
         <dependency>
@@ -67,7 +67,7 @@
         <!-- Akka/Play seems to require these to be manually set to avoid class not found exception issues -->
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-cluster_2.10</artifactId>
+            <artifactId>akka-cluster_${scalaClassifier}</artifactId>
             <version>${akka.version}</version>
         </dependency>
         <dependency>

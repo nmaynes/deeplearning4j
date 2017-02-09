@@ -37,15 +37,12 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>local-nexus</id>
+            <name>Sonatype Nexus Pro Local snapshot repository</name>
+            <url>${NEXUS_URL_SNAPSHOT}</url>
         </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
+
+    </distributionManagement>
 
 
         <!-- Necessary for mvn site commands to work (see runWindowsTest.cmd); url isn't actually used -->
@@ -102,7 +99,7 @@
     </properties>
 
     <profiles>
-        <profile>
+         <profile>
             <id>testresources</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -139,6 +136,46 @@
                 </dependency>
             </dependencies>
         </profile>
+
+         <profile>
+             <id>cuda7.5</id>
+             <activation>
+                 <activeByDefault>true</activeByDefault>
+             </activation>
+             <properties>
+                 <cudaClassifier>7.5</cudaClassifier>
+             </properties>
+         </profile>
+         <profile>
+             <id>cuda8.0</id>
+             <activation>
+                 <activeByDefault>false</activeByDefault>
+             </activation>
+             <properties>
+                 <cudaClassifier>8.0</cudaClassifier>
+             </properties>
+         </profile>
+
+         <profile>
+             <id>scala2.10</id>
+             <activation>
+                 <activeByDefault>true</activeByDefault>
+             </activation>
+             <properties>
+                 <scalaClassifier>2.10</scalaClassifier>
+                 <scalaClassifier.version>2.10.6</scalaClassifier.version>
+             </properties>
+         </profile>
+         <profile>
+             <id>scala2.11</id>
+             <activation>
+                 <activeByDefault>false</activeByDefault>
+             </activation>
+             <properties>
+                 <scalaClassifier>2.11</scalaClassifier>
+                 <scalaClassifier.version>2.11.7</scalaClassifier.version>
+             </properties>
+         </profile>
 
         <!-- For running unit tests with nd4j-cuda-8.0: "mvn clean test -P test-nd4j-cuda-8.0" -->
         <profile>
@@ -363,7 +400,7 @@
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                    <scalaVersion>2.10.6</scalaVersion>
+                    <scalaVersion>${scalaClassifier.version}</scalaVersion>
                     <args>
                         <arg>-deprecation</arg>
                         <arg>-explaintypes</arg>
